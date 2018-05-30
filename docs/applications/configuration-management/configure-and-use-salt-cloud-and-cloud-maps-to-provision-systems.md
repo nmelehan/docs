@@ -56,7 +56,7 @@ The recommended way to install Salt Cloud is with a Salt Bootstrap script. This 
 
 Configure and test access to the Linode API.
 
-1.  Edit `/etc/salt/cloud.providers.d/linode.conf` to configure the name of your provider configuration. Salt Cloud will use it during operations with instances in the CLI. Use a short name (or abbreviation like `li`) that will be easy to remember. You can also specify multiple Linode providers for managing multiple accounts. Linode requires the default root password for the new servers to be set. This password needs to be eight characters and contain lowercase, uppercase, and numbers.
+1.  Edit `/etc/salt/cloud.providers.d/linode.conf` to configure the name of your provider configuration. Salt Cloud will use it during operations with instances in the CLI. Use a short name (or an abbreviation like `li`) that will be easy to remember. You can also specify multiple Linode providers for managing multiple accounts. Linode requires the default root password for the new servers to be set. This password needs to be at least eight characters in length and contain lowercase letters, uppercase letters, and numbers.
 
     {{< file "/etc/salt/cloud.providers.d/linode.conf" conf >}}
 linode-provider:
@@ -162,7 +162,7 @@ linode_1024_with_ssh_key:
 {{< /file >}}
 
     {{< note >}}
-If your master server is located behind a firewall, you will have to open ports `4505-4506` in [firewall](https://docs.saltstack.com/en/latest/topics/tutorials/firewall.html). Depending on your network configuration, you may have to set up port forwarding for these ports.
+If your master server is located behind a firewall, you will have to open ports `4505-4506` in the [firewall](https://docs.saltstack.com/en/latest/topics/tutorials/firewall.html). Depending on your network configuration, you may have to set up port forwarding for these ports.
 {{< /note >}}
 
 ## Salt Cloud Interface
@@ -177,7 +177,7 @@ There are several ways to create new instances:
 
     Creating the instance and installing Salt Minion on it might take some time.
 
-    When deployment is complete, you will see following summary:
+    When deployment is complete, you will see the following summary:
 
         linode1:
             ----------
@@ -211,7 +211,7 @@ There are several ways to create new instances:
     *  Must begin and end with letters or numbers, and
     *  Be at least three characters in length.
 
-*  Normally when creating instances, they are executed serially. Use the `salt-cloud` command with `-P` option to **create instances in parallel allowing for deployment**:
+*  Normally when creating instances, they are executed serially. Use the `salt-cloud` command with the `-P` option to **create instances in parallel allowing for deployment**:
 
         salt-cloud -P -p linode_1024 linode1 linode2
 
@@ -230,7 +230,7 @@ There are several ways to create new instances:
 
 ### Destroy Salt Cloud Instances
 
-1.  To destroy an instance, execute `salt-cloud` with `-d` option:
+1.  To destroy an instance, execute `salt-cloud` with the `-d` option:
 
         salt-cloud -d linode1
 
@@ -246,7 +246,7 @@ Gather partial information by executing `salt-cloud` with the `-Q` option:
 
 **Full Information**
 
-Get full information about instances using `-F` option:
+Get full information about instances using the `-F` option:
 
     salt-cloud -F
 
@@ -260,7 +260,7 @@ query.selection:
     - size
 {{< /file >}}
 
-2.  Execute selective query using `-S` option:
+2.  Execute a selective query using the `-S` option:
 
         salt-cloud -S
 
