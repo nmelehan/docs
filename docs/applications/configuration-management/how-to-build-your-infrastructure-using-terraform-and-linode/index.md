@@ -254,7 +254,7 @@ Terraform will perform the following actions:
       ip_address:         &lt;computed&gt;
       ipv4.#:             &lt;computed&gt;
       ipv6:               &lt;computed&gt;
-      label:              "web"
+      label:              "Terraform-Web-Example"
       private_ip_address: &lt;computed&gt;
       region:             "us-east"
       root_pass:          &lt;sensitive&gt;
@@ -307,7 +307,7 @@ linode_instance.terraform-web: Creating...
   ip_address:         "" =&gt; "&lt;computed&gt;"
   ipv4.#:             "" =&gt; "&lt;computed&gt;"
   ipv6:               "" =&gt; "&lt;computed&gt;"
-  label:              "" =&gt; "web"
+  label:              "" =&gt; "Terraform-Web-Example"
   private_ip_address: "" =&gt; "&lt;computed&gt;"
   region:             "" =&gt; "us-east"
   root_pass:          "&lt;sensitive&gt;" =&gt; "&lt;sensitive&gt;"
