@@ -2,7 +2,7 @@
 author:
   name: Linode
   email: docs@linode.com
-description: 'Use the Linode Manager to check if your Linodes have any pending free upgrades and then take those upgrades.'
+description: 'Use the Linode Manager to check if your Linodes have any pending free upgrades and then initiate those upgrades.'
 keywords: ["Linode Manager", "upgrade", "pending upgrades", "free upgrades"]
 license: '[CC BY-ND 4.0](http://creativecommons.org/licenses/by-nd/4.0/)'
 modified: 2019-01-02
@@ -16,6 +16,7 @@ Background on how Linode periodically makes free upgrades across each of the har
 
 {{< note >}}
 Linode announces new hardware upgrades on the [Linode Blog](https://blog.linode.com)
+{{< /note >}}
 
 ## How to Tell if your Linode is Eligible for an Upgrade
 
