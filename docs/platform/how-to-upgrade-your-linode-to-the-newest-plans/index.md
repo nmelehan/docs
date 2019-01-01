@@ -48,6 +48,6 @@ How to use the `mutate` endpoint:
 
 https://developers.linode.com/api/v4#operation/mutateLinodeInstance
 
-### (Optional) Resize your Disks
+## Next Steps
 
 Explain how storage space upgrades will not automatically result in your Linode's disks being resized to use the newly available space. Link to [resizing a disk](/docs/platform/disk-images/disk-images-and-configuration-profiles/#resizing-a-disk).
