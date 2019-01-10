@@ -10,7 +10,7 @@ modified_by:
   name: Linode
 published: 2010-06-13
 deprecated: true
-deprecated_link: applications/configuration-management/install-and-configure-puppet/
+deprecated_link: applications/configuration-management/beginners-guide-to-puppet
 title: Manage and Automate Systems Configuration with Puppet
 external_resources:
  - '[Puppet Labs Home Page](http://www.puppetlabs.com/)'
