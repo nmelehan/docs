@@ -28,19 +28,17 @@ This guide will introduce the core concepts that Puppet employs to fulfill this 
 
 Describe the relationship between the Puppet Master and your nodes. Explain how the nodes run the Puppet agent software and Masters run the server software.
 
-### Authorization
-
-Explain authentication between masters and nodes.
-
-## The Puppet Agent
-
 Describe the two jobs of the agent software:
 
 -   Phoning home to the master server to find out what aspects of the system need to be managed (installed software, configuration, files, etc)
 
 -   Applying those changes to the system
 
-### Resources and Resource Types
+### Authorization
+
+Explain authentication between masters and nodes.
+
+## Resources and Resource Types
 
 Define a *resource* as any aspect of the system that will be managed by Puppet.
 
@@ -73,6 +71,10 @@ Explain how instead of using commands like `puppet resource` to manually manage 
 Explain how the Puppet Language is a domain-specific language (instead of being a more general language, like YAML or Ruby). Explore benefits and trade-offs of a DSL:
 
 https://puppet.com/blog/why-puppet-has-its-own-configuration-language
+
+{{< note >}}
+The following sections illustrate language concepts by writing code directly on the node and applying it. These demonstrations do not reflect where your code will be kept how it will be applied when actually using Puppet. Instead, in your actual usage your code will be stored on the Master and delivered to the node during an [agent run](#the-agent-run).
+{{< /note >}}
 
 ### Manifests
 
@@ -134,25 +136,19 @@ Notice: Applied catalog in 0.63 seconds
               ||     ||
 {{< /output >}}
 
-That was a demo to illustrate the concept, but classes are generally not defined and declared directly on a node. Instead, they are defined within [modules](#modules) on the Master and delivered to the node during an [agent run](#the-agent-run).
+### Variables
 
-### Modules
+Explain and demonstrate variable syntax in a class. Explain behavior of undefined variables.
 
-Define what a module is: A module is a [specific directory structure](https://puppet.com/docs/puppet/5.3/modules_fundamentals.html) on the Puppet Master that Puppet uses to locate the manifests which should be included in a catalog request.
+Show how to parameterize a class with variables. Show how to declare a class with class-like syntax so that a variable can be set.
 
-The directory that holds your modules is the *modulepath*. The modulepath can be revealed by running the `config` command:
+### Defined Resource Types
 
-    sudo puppet config print modulepath
+Define what a Defined Resource Type is and how it differs from a class. Talk about how Puppet classes are always singletons, but DRTs can be declared more than once. Talk about why you would use a DRT (example use case: virtual host configs, creating system users). Explain the uniqueness constraint for titles and namevars between DRT declarations.
 
-{{< output >}}
-/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/usr/share/puppet/modules
-{{< /output >}}
+## Modules
 
-{{< note >}}
-The modulepath is specified by the Puppet environment. [Environments](https://puppet.com/docs/puppet/4.10/environments_about.html) let you group agent nodes according to the different aspects of your development workflow, e.g. production, testing, and so on.
-{{< /note >}}
-
-Puppet will search for manifests within the directories in the modulepath in the order that they appear.
+Define what a module is: A module is a [specific directory structure](https://puppet.com/docs/puppet/5.3/modules_fundamentals.html) that organizes your Puppet code.
 
 Explain how a module is structured:
 
@@ -166,25 +162,13 @@ Explain how a module is structured:
 
 -   [Templates](#variables-and-templates) are stored in a `files/` directory within the module directory.
 
-### site.pp
-
-Specify where the site.pp file lives, when it is used (link to #the-agent-run)/what it does, how node classification works, including info on regex name matching and other custom classifier matching schemes for nodes.
-
 ### Files
 
 Explain and show the syntax for sourcing a file in a resource (e.g. a default config for apache or something).
 
-### Variables and Templates
+### Templates
 
-Explain and demonstrate variable syntax in a class. Explain behavior of undefined variables.
-
-Show how to parameterize a class with variables. Show how to declare a class with class-like syntax so that a variable can be set.
-
-Show how to use variables in templates.
-
-### Defined Resource Types
-
-Define what a Defined Resource Type is and how it differs from a class. Talk about how Puppet classes are always singletons, but DRTs can be declared more than once. Talk about why you would use a DRT (example use case: virtual host configs, creating system users). Explain the uniqueness constraint for titles and namevars between DRT declarations.
+Show how to use variables in templates, where to store templates in a module, how templates are included in your resources.
 
 ## The Agent Run
 
@@ -194,6 +178,26 @@ Explain the cycle by which an agent requests a catalog from the Master:
 -- Bundled with this catalog request, the agent includes a set of [facts](#facts), or intrinsic attributes, about the node system. These facts will be used by the Master to determine which resources should be applied.
 - The Master compiles the catalog using the Puppet codebase you've written and the facts supplied by the node.
 - The Master sends the catalog to the node, and the agent software applies the changes the catalog describes.
+
+### site.pp
+
+Specify where the site.pp file lives, when it is used (link to #the-agent-run)/what it does, how node classification works, including info on regex name matching and other custom classifier matching schemes for nodes.
+
+### The modulepath
+
+The directory that holds your modules on the Master is the *modulepath*. The modulepath can be revealed by running the `config` command:
+
+    sudo puppet config print modulepath
+
+{{< output >}}
+/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/usr/share/puppet/modules
+{{< /output >}}
+
+{{< note >}}
+The modulepath is specified by the Puppet environment. [Environments](https://puppet.com/docs/puppet/4.10/environments_about.html) let you group agent nodes according to the different aspects of your development workflow, e.g. production, testing, and so on.
+{{< /note >}}
+
+Puppet will search for manifests within the directories in the modulepath in the order that they appear.
 
 ### Facts
 
