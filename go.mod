@@ -9,3 +9,4 @@ require (
 	github.com/bep/linodedocs v0.0.0-20201113200012-d9e9d7cb74fa
 	github.com/linode/linode-api-docs/v4 v4.79.0 // indirect
 )
+replace github.com/bep/linodedocs => ../linodedocs
