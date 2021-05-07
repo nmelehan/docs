@@ -35,6 +35,12 @@ export function toggleClass(openClass, el, open) {
 	}
 }
 
+// normalizeSpace replaces any whitespace character (spaces, tabs, newlines and Unicode space) with a space.
+// Multiple spaces are collapsed into one.
+export function normalizeSpace(text) {
+	return text.replace(/\s\s+/g, ' ');
+}
+
 export const capitalize = (s) => {
 	if (typeof s !== 'string') return '';
 	return s.charAt(0).toUpperCase() + s.slice(1);
