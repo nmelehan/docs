@@ -8,5 +8,5 @@ require (
 	github.com/bep/hugo-jslibs/turbolinks v0.1.2 // indirect
 	github.com/bep/linodedocs v0.0.0-20210212231859-10aa00d2e096
 	github.com/linode/linode-api-docs/v4 v4.128.0 // indirect
-	github.com/linode/linode-docs-theme v0.0.0-20220608180813-cd9efa4c9faa // indirect
+	github.com/linode/linode-docs-theme v0.0.0-20220615085704-5c29c1995dd6 // indirect
 )
