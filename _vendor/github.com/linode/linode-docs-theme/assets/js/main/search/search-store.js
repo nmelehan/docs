@@ -52,10 +52,6 @@ export function newSearchStore(searchConfig, Alpine) {
 		// The blank (needed for the explorer and section metadata) and the main search result.
 		results: results,
 
-		clearQuery: function () {
-			this.query = newQuery();
-		},
-
 		updateLocationWithQuery() {
 			let href = window.location.pathname + window.location.hash;
 			let search = queryHandler.queryAndLocationToQueryString(this.query);
@@ -258,6 +254,7 @@ export function newSearchStore(searchConfig, Alpine) {
 			filters: filters,
 			facetFilters: facetFilters,
 			facets: facets,
+			distinct: 1,
 			attributesToHighlight: attributesToHighlight,
 			params: `query=${q}&hitsPerPage=${hitsPerPage}&page=${page}`,
 		};
@@ -375,8 +372,11 @@ const normalizeResult = function (self, result) {
 		}
 
 		hit.rootSectionTitle = hit['section.lvl0'];
-		if (hit.rootSectionTitle && hit.rootSectionTitle.endsWith('-branches')) {
-			hit.rootSectionTitle = hit.rootSectionTitle.substring(0, hit.rootSectionTitle.indexOf('-branches'));
+		if (hit.rootSectionTitle) {
+			if (hit.rootSectionTitle.endsWith('-branches')) {
+				hit.rootSectionTitle = hit.rootSectionTitle.substring(0, hit.rootSectionTitle.indexOf('-branches'));
+			}
+			hit.rootSectionTitle = hit.rootSectionTitle.replace('-', ' ');
 		}
 
 		hit.titleHighlighted =
@@ -386,6 +386,14 @@ const normalizeResult = function (self, result) {
 			hit._highlightResult && hit._highlightResult.excerpt ? hit._highlightResult.excerpt.value : hit.excerpt;
 
 		hit.linkTitle = hit.linkTitle || hit.title;
+		hit.mainTitle = hit.title || hit.linkTitle;
+
+		if (hit.hierarchy && hit.hierarchy.length) {
+			// This is the reference-section, pick the main title from
+			// the top level.
+			let first = hit.hierarchy[0];
+			hit.mainTitle = first.title || first.linkTitle;
+		}
 
 		if (hit.href) {
 			hit.isExternalLink = hit.href.startsWith('http');
