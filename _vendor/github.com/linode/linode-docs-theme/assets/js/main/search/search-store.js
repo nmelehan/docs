@@ -57,11 +57,12 @@ export function newSearchStore(searchConfig, Alpine) {
 		},
 
 		updateLocationWithQuery() {
-			let href = window.location.pathname + window.location.hash;
 			let search = queryHandler.queryAndLocationToQueryString(this.query);
+			let href = window.location.pathname;
 			if (search) {
 				href += '?' + search;
 			}
+			href += window.location.hash;
 
 			// See https://github.com/hotwired/turbo/issues/163#issuecomment-933691878
 			history.replaceState({ turbo: {} }, null, href);
